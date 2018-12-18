@@ -3,7 +3,7 @@
 <mapper namespace="com.thinkgem.jeesite.modules.oa.dao.VersionDao">
     
 	<select id="get" resultType="Version">
-		select * from sur_version v where v.version_id = #{versionId}
+		select * from sur_version v where v.version_id as id= #{id};
 	</select>
 
 	<select id="findList" resultType="Version">
@@ -27,6 +27,6 @@
 	</delete>
 	<!--物理删除-->
 	<delete id="deleteByVersionId">
-		delete from sur_version where version_id=#{versionId}
+		delete from sur_version where version_id=#{versionId};
 	</delete>
 </mapper>
