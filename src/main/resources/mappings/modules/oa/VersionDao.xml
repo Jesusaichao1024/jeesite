@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.oa.dao.VersionDao">
+    
+	<select id="get" resultType="Version">
+		select * from sur_version v where v.version_id = #{versionId}
+	</select>
+
+	<select id="findList" resultType="Version">
+		select * from sur_version;
+	</select>
+	<insert id="insert" >
+		insert into sur_version (version_id, title, versions, source_name, product_type, source_type, subject, publish_state, view_state, author, create_time, modify_time, publish_time, sort,is_delete) values (
+		#{versionId},#{title},#{versions},#{sourceName},#{productType},#{sourceType},#{subject},#{versionId},#{publishState},#{viewState},#{author},#{createTime},#{modifyTime},#{publishTime},#{sort},#{isDelete}
+		)
+	</insert>
+	<update id="update">
+		update sur_version set
+		 subject = #{subject},
+		 versions = #{versions},
+		 where sur_version.version_id=#{versionId};
+	</update>
+	<!--逻辑删除-->
+	<delete id="delete">
+		update sur_version set is_delete=1 where version_id=#{versionId};
+
+	</delete>
+	<!--物理删除-->
+	<delete id="deleteByVersionId">
+		delete from sur_version where version_id=#{versionId}
+	</delete>
+</mapper>
