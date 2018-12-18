@@ -16,7 +16,8 @@
 		JOIN sys_user u ON u.id = a.user_id
 		JOIN sys_office o ON o.id = u.office_id
 	</sql>
-    
+
+	<!--获取单条数据-->
 	<select id="get" resultType="OaNotifyRecord">
 		SELECT 
 			<include refid="oaNotifyRecordColumns"/>
@@ -24,7 +25,8 @@
 		<include refid="oaNotifyRecordJoins"/>
 		WHERE a.id = #{id}
 	</select>
-	
+
+	<!--查询数据列表 分页查询-->
 	<select id="findList" resultType="OaNotifyRecord">
 		SELECT 
 			<include refid="oaNotifyRecordColumns"/>
@@ -36,7 +38,8 @@
 		</if>
 		ORDER BY a.read_flag ASC
 	</select>
-	
+
+	<!--查询所有的数据列表-->
 	<select id="findAllList" resultType="OaNotifyRecord">
 		SELECT 
 			<include refid="oaNotifyRecordColumns"/>
@@ -45,7 +48,7 @@
 		WHERE 1=1
 		ORDER BY a.read_flag ASC
 	</select>
-	
+	<!--插入数据-->
 	<insert id="insert">
 		INSERT INTO oa_notify_record(
 			ID,
@@ -61,7 +64,8 @@
 			#{readDate}
 		)
 	</insert>
-	
+
+	<!--插入所有的数据-->
 	<insert id="insertAll" parameterType="List">
 		INSERT INTO oa_notify_record(
 			ID,
@@ -89,7 +93,8 @@
 			</foreach>
 	    </if>
 	</insert>
-	
+
+	<!--更新数据-->
 	<update id="update">
 		UPDATE oa_notify_record SET 	
 			READ_FLAG = #{readFlag},
@@ -98,12 +103,13 @@
 			AND USER_ID = #{user.id}
 			AND READ_FLAG != '1'
 	</update>
-	
+	<!--逻辑删除-->
 	<delete id="delete">
 		UPDATE FROM oa_notify_record 
 		WHERE id = #{id}
 	</delete>
-	
+
+	<!--物理删除-->
 	<delete id="deleteByOaNotifyId">
 		DELETE FROM oa_notify_record 
 		WHERE oa_notify_id = #{oaNotifyId}
